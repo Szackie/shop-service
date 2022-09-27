@@ -1,6 +1,7 @@
 package products;
 import products.HibernateUtil;
 import java.util.List;
+import java.util.Optional;
 
 public class ProductsRepository {
 
@@ -35,6 +36,16 @@ public class ProductsRepository {
         transaction.commit();
         session.close();
 
+        return result;
+    }
+    public Optional<Products> findByEAN(Integer codeEAN){
+        var session = HibernateUtil.getSessionFactory().openSession();
+        var transaction=session.beginTransaction();
+
+        var result = Optional.ofNullable(session.get(Products.class,codeEAN));
+
+        transaction.commit();
+        session.close();
         return result;
     }
 

@@ -1,39 +1,35 @@
 package products;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name="products")
+@Table(name = "products")
 public class Products {
 
     @Id
-    @GeneratedValue(generator="inc")
-    @GenericGenerator(name="inc", strategy = "increment")
-    private Integer id;
+    int productID;
     String name;
-    String producer;
-    int codeEAN;
+    String description;
     BigDecimal price;
-
+    double quantity;
 
 
     /**
      * Hibernate (JPA) uses it
      */
     @SuppressWarnings("unused")
-    public Products (){}
+    public Products() {
+    }
 
-    Products(String producer, String name, int codeEAN, BigDecimal price) {
-        this.producer = producer;
+    Products(String description, String name, int productID, BigDecimal price,double quantity) {
+        this.description = description;
         this.name = name;
-        this.codeEAN = codeEAN;
-        this.price=price;
+        this.productID = productID;
+        this.price = price;
+        this.quantity=quantity;
     }
 
     BigDecimal getPrice() {
@@ -44,16 +40,12 @@ public class Products {
         this.price = price;
     }
 
-    Integer getId() {
-        return id;
+    String getDescription() {
+        return description;
     }
 
-    String getProducer() {
-        return producer;
-    }
-
-    void setProducer(String producer) {
-        this.producer = producer;
+    void setDescription(String description) {
+        this.description = description;
     }
 
     String getName() {
@@ -64,12 +56,20 @@ public class Products {
         this.name = name;
     }
 
-    int getCodeEAN() {
-        return codeEAN;
+    int getProductID() {
+        return productID;
     }
 
-    void setCodeEAN(int codeEAN) {
-        this.codeEAN = codeEAN;
+    void setProductID(int productID) {
+        this.productID = productID;
+    }
+
+    double getQuantity() {
+        return quantity;
+    }
+
+    void setQuantity(double quantity) {
+        this.quantity = quantity;
     }
 
 }
